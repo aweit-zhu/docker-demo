@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
-                     sh 'RUN groupadd -g 999 jenkins'
+                     sh 'gpasswd -a jenkins docker && newgrp docker'
                      sh 'docker build -t aweit/docker-demo .'
                  }
             }
