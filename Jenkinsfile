@@ -21,10 +21,9 @@ pipeline {
              steps{
                  script{
                    withCredentials([usernameColonPassword(credentialsId: 'docker-hub', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u aweit -p ${dockerhubpwd}'
-
-                    }
-                    sh 'docker push aweit/docker-demo'
+                      sh 'docker login -u aweit -p xx051821xx051821'
+                   }
+                   sh 'docker push aweit/docker-demo'
                  }
              }
         }
