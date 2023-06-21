@@ -19,7 +19,6 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
-                     sh 'gpasswd -a jenkins docker && newgrp docker'
                      sh 'docker build -t aweit/docker-demo .'
                  }
             }
