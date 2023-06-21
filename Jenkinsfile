@@ -19,7 +19,8 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
-                     sh 'docker build -t aweit/docker-demo .'
+                     sh 'sudo chmod 777 /var/run/docker.sock'
+                     sh 'sudo docker build -t aweit/docker-demo .'
                  }
             }
         }
