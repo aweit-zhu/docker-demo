@@ -30,7 +30,8 @@ pipeline {
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8s')
+                    //kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8s')
+                    sh "microk8s kubectl apply -f deploymentservice.yaml"
                 }
             }
         }
