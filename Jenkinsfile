@@ -19,6 +19,7 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
+                     sh 'RUN groupadd -g 999 jenkins'
                      sh 'docker build -t aweit/docker-demo .'
                  }
             }
