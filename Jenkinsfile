@@ -13,27 +13,25 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
-                     sh 'docker build -t ragul05/devops-integration:v1.$BUILD_ID .'
-                     sh 'docker build -t ragul05/devops-integration:latest .'
+                     sh 'docker build -t aweit/docker-demo .'
                  }
             }
         }
         stage('Push image to Hub'){
              steps{
                  script{
-                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u ragul05 -p ${dockerhubpwd}'
+                   withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerhubpwd')]) {
+                    sh 'docker login -u aweit -p ${dockerhubpwd}'
 
                     }
-                    sh 'docker push ragul05/devops-integration:v1.$BUILD_ID'
-                    sh 'docker push ragul05/devops-integration:latest'
+                    sh 'docker push aweit/docker-demo'
                  }
              }
         }
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8s')
                 }
             }
         }
