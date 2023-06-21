@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'jenkins-slave'
+        }
+
+    }
+
     tools{
         maven 'M3'
     }
