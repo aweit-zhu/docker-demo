@@ -20,8 +20,8 @@ pipeline {
         stage('Push image to Hub'){
              steps{
                  script{
-                   withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
-                    sh 'docker login -u aweit -p ${docker-hub}'
+                   withCredentials([usernameColonPassword(credentialsId: 'docker-hub', variable: 'dockerhubpwd')]) {
+                    sh 'docker login -u aweit -p ${dockerhubpwd}'
 
                     }
                     sh 'docker push aweit/docker-demo'
