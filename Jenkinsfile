@@ -19,7 +19,7 @@ pipeline {
         stage('Build Image'){
             steps{
                 script{
-                     sh 'docker build -t aweit/docker-demo .'
+                     sh 'sudo docker build -t aweit/docker-demo .'
                  }
             }
         }
