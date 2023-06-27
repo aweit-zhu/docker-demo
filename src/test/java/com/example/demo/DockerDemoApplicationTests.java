@@ -9,6 +9,7 @@ class DockerDemoApplicationTests {
 	@Test
 	void contextLoads() {
 		System.out.println("TEST OK");
+		System.out.println(1/0);
 	}
 
 }
