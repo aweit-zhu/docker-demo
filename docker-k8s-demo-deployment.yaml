@@ -17,6 +17,7 @@ spec:
       containers:
       - name: docker-k8s-demo
         image: aweit/docker-demo
+        imagePullPolicy: "Always"
         env:
         - name: "PORT"
           value: "8090"
