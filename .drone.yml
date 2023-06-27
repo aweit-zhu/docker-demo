@@ -24,17 +24,17 @@ steps:
       - mvn clean package
       - cp target/docker-demo.jar /app/build/docker-demo.jar
       - cp Dockerfile /app/build/Dockerfile
-      - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml  # K8S 設定檔
-      - cp deploymentservice.yaml /app/build/deploymentservice.yaml # K8S 設定檔
+      - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml
+      - cp deploymentservice.yaml /app/build/deploymentservice.yaml
       - cp run.sh /app/build/run.sh
       
   - name: scp files
     image: appleboy/drone-scp
     settings:
-      host: 192.168.0.16
+      host: 192.168.0.17
       username: root
       password: 
-        from_secret: ssh_password_microk8s_vm
+        from_secret: ssh_password_master
       port: 22
       command_timeout: 2m
       target: /mydata/maven/build
@@ -60,7 +60,7 @@ steps:
       host: 192.168.0.16
       username: vboxuser
       password:
-        from_secret: ssh_password_microk8s_vm
+        from_secret: ssh_password_master
       port: 22
       command_timeout: 5m
       script:
