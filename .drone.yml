@@ -57,7 +57,7 @@ steps:
   - name: build-start02
     image: appleboy/drone-ssh
     settings:
-      host: 192.168.0.16
+      host: 192.168.0.17
       username: vboxuser
       password:
         from_secret: ssh_password_master
