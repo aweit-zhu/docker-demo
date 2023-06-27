@@ -26,10 +26,8 @@ steps:
         from_secret: ssh_password_microk8s_vm
       port: 22
       command_timeout: 2m
-      script:
-        - cd /mydata/maven/build
       target: /mydata/maven/build
-      source: /mydata/maven/build/docker-k8s-demo-deployment.yaml
+      source: ./mydata/maven/build
       
   - name: build-start01
     image: appleboy/drone-ssh
