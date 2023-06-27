@@ -17,4 +17,10 @@ public class DemoController {
 		System.out.println("This is a DockerDemo! /test");
 		return "This is a DockerDemo2!";
 	}
+	
+	@GetMapping("/test2")
+	public String getTest2() {
+		System.out.println("This is a DockerDemo! /test2");
+		return "This is a DockerDemo3!";
+	}
 }
