@@ -17,7 +17,7 @@ steps:
   - name: build-start
     image: appleboy/drone-ssh
     settings:
-      host: 192.168.0.15
+      host: 192.168.0.16
       username: vboxuser
       password:
         from_secret: ssh_password_microk8s_vm
