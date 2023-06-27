@@ -30,6 +30,17 @@ steps:
         - cd /mydata/maven/build
         - chmod +x run.sh
         - ./run.sh
+        
+  - name: scp files
+    image: appleboy/drone-scp
+    settings:
+      host: 192.168.0.16
+      username: vboxuser
+      password: 
+        from_secret: ssh_password_microk8s_vm
+      port: 22
+      target: /mydata/maven/build
+      source: /mydata/maven/build
 
   - name: build-start02
     image: appleboy/drone-ssh
