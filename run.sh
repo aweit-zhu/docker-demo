@@ -16,6 +16,7 @@ docker build -t ${group_name}/${app_name} .
 
 echo '----push imag----'
 docker login -u aweit -p xx051821xx051821
+docker tag ${group_name}/${app_name} ${group_name}/${app_name}
 docker push ${group_name}/${app_name}
 
 echo '----build image----'
