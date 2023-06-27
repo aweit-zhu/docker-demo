@@ -2,21 +2,6 @@ kind: pipeline
 type: docker
 name: docker-demo-drone
 steps:
-  - name: code-analysis
-    image: aosapps/drone-sonar-plugin
-    settings:
-      sonar_host:
-        from_secret: sonar_host
-      sonar_token:
-        from_secret: sonar_token
-    commands:
-       - sonar-scanner -Dsonar.projectKey=docker-demo 
-         -Dsonar.tests=src/test/java
-         -Dsonar.sources=src/main/java
-         -Dsonar.java.libraries=./target/classes
-         -Dsonar.java.binaries=./target/classes
-         -Dsonar.host.url=http://172.31.93.122:9000/ 
-         -Dsonar.login=sqa_2d932888615a4ca75bf80e889a422a9bde711ec3
 
   - name: test
     image: maven:3-jdk-8
@@ -43,7 +28,23 @@ steps:
       - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml
       - cp deploymentservice.yaml /app/build/deploymentservice.yaml
       - cp run.sh /app/build/run.sh
-      
+  
+  - name: code-analysis
+    image: aosapps/drone-sonar-plugin
+    settings:
+      sonar_host:
+        from_secret: sonar_host
+      sonar_token:
+        from_secret: sonar_token
+    commands:
+       - sonar-scanner -Dsonar.projectKey=docker-demo 
+         -Dsonar.tests=src/test/java
+         -Dsonar.sources=src/main/java
+         -Dsonar.java.libraries=./target/classes
+         -Dsonar.java.binaries=./target/classes
+         -Dsonar.host.url=http://172.31.93.122:9000/ 
+         -Dsonar.login=sqa_2d932888615a4ca75bf80e889a422a9bde711ec3
+  
   - name: scp files
     image: appleboy/drone-scp
     settings:
