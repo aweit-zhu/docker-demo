@@ -2,6 +2,16 @@ kind: pipeline
 type: docker
 name: docker-demo-drone
 steps:
+  - name: test
+    image: maven:3-jdk-8
+    volumes: 
+      - name: maven-cache
+        path: /root/.m2
+      - name: maven-build
+        path: /app/build
+    commands:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn test -B
   - name: package
     image: maven:3-jdk-8
     volumes: 
