@@ -16,7 +16,7 @@ steps:
       - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml  # K8S 設定檔
       - cp deploymentservice.yaml /app/build/deploymentservice.yaml # K8S 設定檔
       - cp run.sh /app/build/run.sh
-  - name: build-start
+  - name: build-start01
     image: appleboy/drone-ssh
     settings:
       host: 172.31.93.122
@@ -30,7 +30,7 @@ steps:
         - chmod +x run.sh
         - ./run.sh
 
-  - name: build-start
+  - name: build-start02
     image: appleboy/drone-ssh
     settings:
       host: 192.168.0.16
