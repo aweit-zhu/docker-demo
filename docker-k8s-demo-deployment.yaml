@@ -19,4 +19,4 @@ spec:
         image: aweit/docker-demo
         env:
         - name: "PORT"
-          value: "8080"
+          value: "8090"

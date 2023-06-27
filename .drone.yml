@@ -55,7 +55,6 @@ steps:
       script:
         - cd /mydata/maven/build
         - microk8s.kubectl apply -f ./docker-k8s-demo-deployment.yaml
-        - microk8s.kubectl apply -f ./deploymentservice.yaml
 
 volumes: 
   - name: maven-build
