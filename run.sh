@@ -15,6 +15,10 @@ docker rmi ${group_name}/${app_name}:${app_version}
 echo '----rm image----'
 docker build -t ${group_name}/${app_name}:${app_version} .
 
+echo '----push imag----'
+docker login -u aweit -p xx051821xx051821
+docker push ${group_name}/${app_name}:${app_version}
+
 echo '----build image----'
 docker run -p 8090:8090 --name ${app_name} \
 -v /mydata/app/${app_name}/logs:/var/logs \

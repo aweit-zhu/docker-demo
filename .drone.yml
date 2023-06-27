@@ -1,5 +1,5 @@
 kind: pipeline
-type: kubernetes
+type: docker
 name: docker-demo-drone
 steps:
   - name: package
@@ -13,7 +13,23 @@ steps:
       - mvn clean package
       - cp target/docker-demo.jar /app/build/docker-demo.jar
       - cp Dockerfile /app/build/Dockerfile
+      - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml  # K8S 設定檔
+      - cp deploymentservice.yaml /app/build/deploymentservice.yaml # K8S 設定檔
       - cp run.sh /app/build/run.sh
+  - name: build-start
+    image: appleboy/drone-ssh
+    settings:
+      host: 172.31.93.122
+      username: root
+      password:
+        from_secret: ssh_password
+      port: 2222
+      command_timeout: 5m
+      script:
+        - cd /mydata/maven/build
+        - chmod +x run.sh
+        - ./run.sh
+
   - name: build-start
     image: appleboy/drone-ssh
     settings:
@@ -25,12 +41,5 @@ steps:
       command_timeout: 5m
       script:
         - cd /mydata/maven/build
-        - ./run.sh
-        
-volumes: 
-  - name: maven-build
-    host:
-      path: /mydata/maven/build
-  - name: maven-cache
-    host:
-      path: /mydata/maven/cache
+        - microk8s.kubectl apply -f docker-k8s-demo-deployment.yaml
+        - microk8s.kubectl apply -f deploymentservice.yaml
