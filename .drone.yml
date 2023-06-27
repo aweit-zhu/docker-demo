@@ -21,7 +21,7 @@ steps:
     image: appleboy/drone-scp
     settings:
       host: 192.168.0.16
-      username: vboxuser
+      username: root
       password: 
         from_secret: ssh_password_microk8s_vm
       port: 22
