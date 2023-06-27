@@ -20,18 +20,18 @@ steps:
       host: 172.31.93.122
       username: root
       password:
-        from_secret: ssh_password # 从Secret中读取SSH密码
+        from_secret: ssh_password
       port: 2222
       command_timeout: 5m
       script:
-        - cd /mydata/maven/build # 进入宿主机构建目录
-        - chmod +x run.sh # 更改为可执行脚本
-        - ./run.sh # 运行脚本打包应用镜像并运行
+        - cd /mydata/maven/build
+        - chmod +x run.sh
+        - ./run.sh
         
-volumes: # 定义流水线挂载目录，用于共享数据
+volumes: 
   - name: maven-build
     host:
-      path: /mydata/maven/build # 从宿主机中挂载的目录
+      path: /mydata/maven/build
   - name: maven-cache
     host:
       path: /mydata/maven/cache
