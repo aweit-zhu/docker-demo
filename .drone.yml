@@ -16,6 +16,7 @@ steps:
       - cp docker-k8s-demo-deployment.yaml /app/build/docker-k8s-demo-deployment.yaml  # K8S 設定檔
       - cp deploymentservice.yaml /app/build/deploymentservice.yaml # K8S 設定檔
       - cp run.sh /app/build/run.sh
+      
   - name: build-start01
     image: appleboy/drone-ssh
     settings:
@@ -41,8 +42,8 @@ steps:
       command_timeout: 5m
       script:
         - cd /mydata/maven/build
-        - microk8s.kubectl apply -f docker-k8s-demo-deployment.yaml
-        - microk8s.kubectl apply -f deploymentservice.yaml
+        - microk8s.kubectl apply -f ./docker-k8s-demo-deployment.yaml
+        - microk8s.kubectl apply -f ./deploymentservice.yaml
 
 volumes: 
   - name: maven-build
