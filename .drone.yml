@@ -17,6 +17,18 @@ steps:
       - cp deploymentservice.yaml /app/build/deploymentservice.yaml # K8S 設定檔
       - cp run.sh /app/build/run.sh
       
+  - name: scp files
+    image: appleboy/drone-scp
+    settings:
+      host: 192.168.0.16
+      username: vboxuser
+      password: 
+        from_secret: ssh_password_microk8s_vm
+      port: 22
+      command_timeout: 2m
+      target: /mydata/maven/build
+      source: /mydata/maven/build/docker-k8s-demo-deployment.yaml
+      
   - name: build-start01
     image: appleboy/drone-ssh
     settings:
@@ -31,17 +43,6 @@ steps:
         - chmod +x run.sh
         - ./run.sh
         
-  - name: scp files
-    image: appleboy/drone-scp
-    settings:
-      host: 192.168.0.16
-      username: vboxuser
-      password: 
-        from_secret: ssh_password_microk8s_vm
-      port: 22
-      target: /mydata/maven/build
-      source: /mydata/maven/build
-
   - name: build-start02
     image: appleboy/drone-ssh
     settings:
