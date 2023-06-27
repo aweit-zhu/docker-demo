@@ -65,7 +65,7 @@ steps:
       command_timeout: 5m
       script:
         - cd /mydata/maven/build
-        - microk8s.kubectl delete deploy docker-k8s-demo-service
+        - microk8s.kubectl delete deploy docker-k8s-demo-deployment
         - microk8s.kubectl apply -f ./docker-k8s-demo-deployment.yaml
 
 volumes: 
